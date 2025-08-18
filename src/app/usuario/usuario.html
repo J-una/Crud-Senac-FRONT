@@ -1,0 +1,33 @@
+<div class="usuario-container">
+  <h2>Gestão de Usuários</h2>
+
+  <!-- Barra de pesquisa e botão cadastrar -->
+  <div class="toolbar">
+    <input type="text" [(ngModel)]="pesquisa" (input)="buscarUsuarios()" placeholder="Pesquisar usuário..." />
+    <button class="btn-cadastrar" (click)="cadastrar()">Cadastrar</button>
+  </div>
+
+  <!-- Lista de usuários -->
+  <table class="tabela-usuarios">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosFiltrados">
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>
+          <button class="btn-editar" (click)="editar(usuario)">Editar</button>
+          <button class="btn-excluir" (click)="excluir(usuario)">Excluir</button>
+        </td>
+      </tr>
+      <tr *ngIf="usuariosFiltrados.length === 0">
+        <td colspan="3" style="text-align:center;">Nenhum usuário encontrado</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

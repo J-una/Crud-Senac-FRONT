@@ -1,0 +1,59 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222; /* header mais escuro */
+  padding: 15px 40px;
+  color: white;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* Logo */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Links centralizados */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.navbar-links li a:hover,
+.navbar-links li a.active {
+  border-bottom: 2px solid #ffcc00; /* amarelo no ativo/hover */
+}
+
+/* Botão à direita */
+.btn-contact {
+  background: #ffcc00;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  color: #222;
+}
+
+.btn-contact:hover {
+  background: #e6b800;
+}

@@ -1,0 +1,96 @@
+.usuario-container {
+  padding: 20px;
+  background-color: #1e1e1e; /* fundo escuro */
+  color: #f0f0f0; /* texto claro */
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* Barra de pesquisa e botão cadastrar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.toolbar input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+
+.toolbar input::placeholder {
+  color: #aaa;
+}
+
+.btn-cadastrar {
+  margin-left: 10px;
+  padding: 8px 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cadastrar:hover {
+  background: #218838;
+}
+
+/* Tabela */
+.tabela-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tabela-usuarios th,
+.tabela-usuarios td {
+  border: 1px solid #444;
+  padding: 10px;
+  color: #f0f0f0;
+}
+
+.tabela-usuarios th {
+  background: #333;
+  text-align: left;
+}
+
+/* Botões de ação */
+.btn-editar {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background: #0069d9;
+}
+
+.btn-excluir {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-excluir:hover {
+  background: #c82333;
+}
