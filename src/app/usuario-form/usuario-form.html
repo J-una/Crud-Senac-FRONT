@@ -1,0 +1,41 @@
+<div class="usuario-container">
+  <h2>{{ ehEdicao ? 'Editar Usuário' : 'Cadastrar Usuário' }}</h2>
+
+  <form [formGroup]="formUsuario" (ngSubmit)="salvar()">
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome..." />
+    </div>
+
+    <!-- CPF -->
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input id="cpf" type="text" formControlName="cpf" placeholder="Digite o CPF..." [disabled]="ehEdicao" />
+    </div>
+
+    <!-- Senha (somente em cadastro ou se editar explicitamente) -->
+    <div class="form-group" *ngIf="!ehEdicao">
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" formControlName="senha" placeholder="Digite a senha..." />
+    </div>
+
+    <!-- Perfil -->
+    <div class="form-group">
+      <label for="perfil">Perfil</label>
+      <select id="perfil" formControlName="perfil">
+        <option value="">Selecione...</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Usuario">Usuário</option>
+      </select>
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button type="submit" class="btn-salvar">
+        {{ ehEdicao ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+      <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>
+    </div>
+  </form>
+</div>

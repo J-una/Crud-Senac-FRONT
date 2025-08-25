@@ -3,7 +3,7 @@
 
   <!-- Barra de pesquisa e botão cadastrar -->
   <div class="toolbar">
-    <input type="text" [(ngModel)]="pesquisa" (input)="buscarUsuarios()" placeholder="Pesquisar usuário..." />
+    <input type="text" [(ngModel)]="pesquisa" (input)="pesquisarUsuarios()" placeholder="Pesquisar usuário..." />
     <button class="btn-cadastrar" (click)="cadastrar()">Cadastrar</button>
   </div>
 
@@ -12,17 +12,19 @@
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Email</th>
+        <th>CPF</th>
+        <th>Perfil</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of usuariosFiltrados">
         <td>{{ usuario.nome }}</td>
-        <td>{{ usuario.email }}</td>
+        <td>{{ formatarCpf(usuario.cpf) }}</td>
+        <td>{{ usuario.perfil }}</td>
         <td>
           <button class="btn-editar" (click)="editar(usuario)">Editar</button>
-          <button class="btn-excluir" (click)="excluir(usuario)">Excluir</button>
+          <button class="btn-excluir" (click)="abrirModal(usuario)">Excluir</button>
         </td>
       </tr>
       <tr *ngIf="usuariosFiltrados.length === 0">
@@ -30,4 +32,16 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+
+<div class="modal-backdrop" *ngIf="modalAberto">
+  <div class="modal">
+    <h3>Confirmar Exclusão</h3>
+    <p>Tem certeza que deseja excluir <b>{{ usuarioSelecionado?.nome }}</b>?</p>
+    <div class="modal-actions">
+      <button (click)="confirmarExclusao()">Sim</button>
+      <button (click)="fecharModal()">Cancelar</button>
+    </div>
+  </div>
 </div>

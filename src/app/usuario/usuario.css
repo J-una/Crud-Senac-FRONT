@@ -94,3 +94,72 @@ h2 {
 .btn-excluir:hover {
   background: #c82333;
 }
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75); /* mais escuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* garantir que fica na frente */
+}
+
+.modal {
+  background-color: #2a2a2a; /* fundo igual à tabela */
+  color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  width: 380px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+  text-align: center;
+  border: 1px solid #444; /* borda igual tabela */
+}
+
+.modal h3 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.modal p {
+  margin: 15px 0;
+  color: #ddd;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Botões herdando estilo */
+.modal-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-actions button:first-child {
+  background: #dc3545; /* vermelho igual excluir */
+  color: #fff;
+}
+
+.modal-actions button:first-child:hover {
+  background: #c82333;
+}
+
+.modal-actions button:last-child {
+  background: #6c757d; /* cinza estilo cancelar */
+  color: #fff;
+}
+
+.modal-actions button:last-child:hover {
+  background: #5a6268;
+}

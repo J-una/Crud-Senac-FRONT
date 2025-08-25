@@ -1,1 +1,44 @@
-<p>cliente works!</p>
+<div class="usuario-container">
+  <h2>Gestão de Clientes</h2>
+
+  <div class="toolbar">
+    <input type="text" [(ngModel)]="pesquisa" (input)="pesquisarClientes()" placeholder="Pesquisar cliente..." />
+    <button class="btn-cadastrar" (click)="cadastrar()">Cadastrar</button>
+  </div>
+
+  <table class="tabela-usuarios">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientesFiltrados">
+        <td>{{ cliente.nome }}</td>
+        <td>{{ formatarCpf(cliente.cpf) }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>
+          <button class="btn-editar" (click)="editar(cliente)">Editar</button>
+          <button class="btn-excluir" (click)="abrirModal(cliente)">Excluir</button>
+        </td>
+      </tr>
+      <tr *ngIf="clientesFiltrados.length === 0">
+        <td colspan="4" style="text-align:center;">Nenhum cliente encontrado</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-backdrop" *ngIf="modalAberto">
+  <div class="modal">
+    <h3>Confirmar Exclusão</h3>
+    <p>Tem certeza que deseja excluir <b>{{ clienteSelecionado?.nome }}</b>?</p>
+    <div class="modal-actions">
+      <button (click)="confirmarExclusao()">Sim</button>
+      <button (click)="fecharModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
