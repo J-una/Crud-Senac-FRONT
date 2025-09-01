@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav *ngIf="logado" class="navbar">
   <div class="navbar-brand">Senac</div>
 
   <ul class="navbar-links">
@@ -7,7 +7,7 @@
     <li><a routerLink="/produto" routerLinkActive="active">Produtos</a></li>
   </ul>
 
-  <button class="btn-contact">Sair</button>
+  <button class="btn-contact" (click)="logout()">Sair</button>
 </nav>
 
 <main class="content">

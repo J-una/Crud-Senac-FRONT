@@ -28,6 +28,7 @@ export class UsuarioFormComponent implements OnInit {
   ngOnInit(): void {
     this.formUsuario = this.fb.group({
       nome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       cpf: ['', Validators.required],
       senha: [''],
       perfil: ['', Validators.required]
@@ -47,6 +48,7 @@ export class UsuarioFormComponent implements OnInit {
     console.log('Usuário carregado para edição:', res);
     this.formUsuario.patchValue({
       nome: res.dados.nome,
+      email: res.dados.email,
       cpf: res.dados.cpf,
       perfil: res.dados.perfil
       // senha não preenche (segurança)

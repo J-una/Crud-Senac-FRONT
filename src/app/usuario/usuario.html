@@ -13,6 +13,7 @@
       <tr>
         <th>Nome</th>
         <th>CPF</th>
+        <th>Email</th>
         <th>Perfil</th>
         <th>Ações</th>
       </tr>
@@ -21,6 +22,7 @@
       <tr *ngFor="let usuario of usuariosFiltrados">
         <td>{{ usuario.nome }}</td>
         <td>{{ formatarCpf(usuario.cpf) }}</td>
+        <td>{{ usuario.email }}</td>
         <td>{{ usuario.perfil }}</td>
         <td>
           <button class="btn-editar" (click)="editar(usuario)">Editar</button>

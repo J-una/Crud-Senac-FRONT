@@ -1,0 +1,46 @@
+<div class="produto-container">
+  <h2>{{ ehEdicao ? 'Editar Produto' : 'Cadastrar Produto' }}</h2>
+
+  <form [formGroup]="formProduto" (ngSubmit)="salvar()">
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome do produto..." />
+    </div>
+
+    <!-- Marca -->
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input id="marca" type="text" formControlName="marca" placeholder="Digite a marca..." />
+    </div>
+
+    <!-- Tipo (dropdown) -->
+    <div class="form-group">
+      <label for="tipo">Tipo</label>
+      <select id="tipo" formControlName="tipo">
+        <option value="" disabled>Selecione o tipo</option>
+        <option *ngFor="let tipo of tiposPreDefinidos" [value]="tipo">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <!-- Preço -->
+    <div class="form-group">
+      <label for="preco">Preço</label>
+      <input id="preco" type="number" formControlName="preco" placeholder="Digite o preço..." step="0.01" />
+    </div>
+
+    <!-- Quantidade -->
+    <div class="form-group">
+      <label for="quantidade">Quantidade</label>
+      <input id="quantidade" type="number" formControlName="quantidade" placeholder="Digite a quantidade..." />
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <button type="submit" class="btn-salvar">
+        {{ ehEdicao ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+      <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>
+    </div>
+  </form>
+</div>

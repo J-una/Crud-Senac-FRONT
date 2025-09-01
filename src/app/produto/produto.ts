@@ -22,10 +22,10 @@ export class ProdutoComponent implements OnInit {
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.pesquisarProdutos();
+    this.buscarProdutos();
   }
 
-  pesquisarProdutos(): void {
+  buscarProdutos(): void {
     this.produtoService.listar().subscribe(res => {
       this.produtos = res.dados;
       this.produtosFiltrados = this.produtos.filter(p =>
@@ -33,13 +33,30 @@ export class ProdutoComponent implements OnInit {
       );
     });
   }
+pesquisarProdutos(): void {
+  const termo = this.pesquisa.trim().toLowerCase();
+
+  if (!termo) {
+    // se a pesquisa estiver vazia, mostra todos
+    this.produtosFiltrados = [...this.produtos];
+    return;
+  }
+
+  this.produtosFiltrados = this.produtos.filter(p =>
+    p.nome.toLowerCase().includes(termo) ||
+    p.marca.toLowerCase().includes(termo) ||
+    p.tipo.toLowerCase().includes(termo) ||
+    p.preco.toString().includes(termo) ||
+    p.quantidade.toString().includes(termo)
+  );
+}
 
   cadastrar(): void {
-    this.router.navigate(['/produtos/novo']);
+    this.router.navigate(['/produto/novo']);
   }
 
   editar(produto: Produto): void {
-    this.router.navigate(['/produtos/editar', produto.idProduto]);
+    this.router.navigate(['/produto/editar', produto.idProduto]);
   }
 
   abrirModal(produto: Produto): void {
@@ -55,7 +72,7 @@ export class ProdutoComponent implements OnInit {
   confirmarExclusao(): void {
     if (!this.produtoSelecionado) return;
     this.produtoService.excluir(this.produtoSelecionado.idProduto).subscribe(() => {
-      this.pesquisarProdutos();
+      this.buscarProdutos();
       this.fecharModal();
     });
   }

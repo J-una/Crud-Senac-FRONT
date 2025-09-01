@@ -3,17 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../services/usuario.services';
 import { Router } from '@angular/router';
-
-interface Usuario {
-  idUsuario: string;
-  nome: string;
-  cpf: string;
-  senha: string;
-  perfil: string;
-  dataCriacao: Date;
-  dataAlteracao: Date;
-  ativo: boolean;
-}
+import { Usuario } from '../const/Interface';
 
 @Component({
   selector: 'app-usuario',
@@ -41,15 +31,20 @@ export class UsuarioComponent implements OnInit {
   }
 
   pesquisarUsuarios() {
-    // if (this.pesquisa.trim() === '') {
-    //   this.usuariosFiltrados = [...this.usuarios];
-    // } else {
-    //   this.usuariosFiltrados = this.usuarios.filter(u =>
-    //     u.nome.toLowerCase().includes(this.pesquisa.toLowerCase()) ||
-    //     u.email.toLowerCase().includes(this.pesquisa.toLowerCase())
-    //   );
-    // }
+  const termo = this.pesquisa.trim().toLowerCase();
+
+  if (!termo) {
+    // se a pesquisa estiver vazia, mostra todos
+    this.usuariosFiltrados = [...this.usuarios];
+    return;
   }
+
+  this.usuariosFiltrados = this.usuarios.filter(u =>
+    u.nome.toLowerCase().includes(termo) ||
+    u.cpf.toLowerCase().includes(termo) ||
+    u.perfil.toLowerCase().includes(termo)
+  );
+}
 
   buscarUsuarios() {
     console.log('Buscando usuários...');

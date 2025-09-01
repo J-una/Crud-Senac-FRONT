@@ -22,10 +22,10 @@ export class ClienteComponent implements OnInit {
   constructor(private clienteService: ClienteService, private router: Router) {}
 
   ngOnInit(): void {
-    this.pesquisarClientes();
+    this.buscarClientes();
   }
 
-  pesquisarClientes(): void {
+  buscarClientes(): void {
     this.clienteService.listar().subscribe(res => {
       this.clientes = res.dados;
       this.clientesFiltrados = this.clientes.filter(c =>
@@ -33,17 +33,34 @@ export class ClienteComponent implements OnInit {
       );
     });
   }
+pesquisarClientes(): void {
+  const termo = this.pesquisa.trim().toLowerCase();
+
+  if (!termo) {
+    // Se o campo de pesquisa estiver vazio, mostra todos
+    this.clientesFiltrados = [...this.clientes];
+    return;
+  }
+
+  this.clientesFiltrados = this.clientes.filter(c =>
+    c.nome.toLowerCase().includes(termo) ||
+    c.cpf.replace(/\D/g, '').includes(termo.replace(/\D/g, '')) || // ignora pontos e traços
+    c.email.toLowerCase().includes(termo)
+  );
+}
+
+
 
   formatarCpf(cpf: string): string {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   }
 
   cadastrar(): void {
-    this.router.navigate(['/clientes/novo']);
+    this.router.navigate(['/cliente/novo']);
   }
 
   editar(cliente: Cliente): void {
-    this.router.navigate(['/clientes/editar', cliente.idCliente]);
+    this.router.navigate(['/cliente/editar', cliente.idCliente]);
   }
 
   abrirModal(cliente: Cliente): void {
@@ -59,7 +76,7 @@ export class ClienteComponent implements OnInit {
   confirmarExclusao(): void {
     if (!this.clienteSelecionado) return;
     this.clienteService.excluir(this.clienteSelecionado.idCliente).subscribe(() => {
-      this.pesquisarClientes();
+      this.buscarClientes();
       this.fecharModal();
     });
   }

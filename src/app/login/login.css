@@ -1,0 +1,79 @@
+/* Container geral do login */
+.login-container {
+  width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Título */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ffffff;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grupos de input */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  font-size: 14px;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Botões */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.form-actions button:hover {
+  background: #218838;
+}

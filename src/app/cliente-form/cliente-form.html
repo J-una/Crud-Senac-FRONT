@@ -1,7 +1,7 @@
-<div class="usuario-container">
-  <h2>{{ ehEdicao ? 'Editar Usuário' : 'Cadastrar Usuário' }}</h2>
+<div class="cliente-container">
+  <h2>{{ ehEdicao ? 'Editar Cliente' : 'Cadastrar Cliente' }}</h2>
 
-  <form [formGroup]="formUsuario" (ngSubmit)="salvar()">
+  <form [formGroup]="formCliente" (ngSubmit)="salvar()">
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
@@ -14,26 +14,16 @@
       <input id="cpf" type="text" formControlName="cpf" placeholder="Digite o CPF..." [disabled]="ehEdicao" />
     </div>
 
-     <!-- EMAIL -->
+    <!-- Email -->
     <div class="form-group">
       <label for="email">Email</label>
-      <input id="email" type="text" formControlName="email" placeholder="Digite o Email..." />
+      <input id="email" type="email" formControlName="email" placeholder="Digite o email..." />
     </div>
 
-    <!-- Senha (somente em cadastro ou se editar explicitamente) -->
+    <!-- Senha (somente em cadastro) -->
     <div class="form-group" *ngIf="!ehEdicao">
       <label for="senha">Senha</label>
       <input id="senha" type="password" formControlName="senha" placeholder="Digite a senha..." />
-    </div>
-
-    <!-- Perfil -->
-    <div class="form-group">
-      <label for="perfil">Perfil</label>
-      <select id="perfil" formControlName="perfil">
-        <option value="">Selecione...</option>
-        <option value="Administrador">Administrador</option>
-        <option value="Usuario">Usuário</option>
-      </select>
     </div>
 
     <!-- Botões -->

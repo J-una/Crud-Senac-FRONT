@@ -1,15 +1,36 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../AuthService';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,CommonModule],
   templateUrl: './inicio.html',
   styleUrls: ['./inicio.css']
 })
 export class Inicio {
-  constructor() {
-    console.log('Inicio componente criado');
+
+   logado = false;
+
+   constructor(
+    private routermodule: RouterModule,
+    private authService: AuthService,
+    private router: Router
+   ) {
   }
+
+  ngOnInit() {
+    this.authService.logado$.subscribe(status => {
+      this.logado = status;
+      console.log('Usuário logado:', this.logado);
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }
