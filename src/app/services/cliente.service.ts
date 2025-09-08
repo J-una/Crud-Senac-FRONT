@@ -19,7 +19,7 @@ interface ClienteSingleResponse {
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = 'https://localhost:7224/api/Cliente';
+  private apiUrl = 'https://localhost:44363/api/Cliente';
 
   constructor(private http: HttpClient) {}
 

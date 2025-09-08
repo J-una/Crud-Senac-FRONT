@@ -7,6 +7,8 @@ import { ClienteFormComponent } from './cliente-form/cliente-form';
 import { ProdutoFormComponent } from './produto-form/produto-form';
 import { LoginComponent } from './login/login';
 import { AuthGuard } from './guards/auth.guard';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha';
 
 // export const routes: Routes = [
 //   { path: 'login', component: LoginComponent },
@@ -35,5 +37,7 @@ export const routes: Routes = [
   { path: 'produto/novo', component: ProdutoFormComponent, canActivate: [AuthGuard] },
   { path: 'produto/editar/:id', component: ProdutoFormComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'recuperar-senha', component: EsqueciSenhaComponent },
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

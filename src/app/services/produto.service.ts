@@ -19,7 +19,7 @@ interface ProdutoSingleResponse {
   providedIn: 'root'
 })
 export class ProdutoService {
-  private apiUrl = 'https://localhost:7224/api/Produto';
+  private apiUrl = 'https://localhost:44363/api/Produto';
 
   constructor(private http: HttpClient) {}
 

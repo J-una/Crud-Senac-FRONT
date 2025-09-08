@@ -10,7 +10,13 @@
     <div class="form-group">
       <label for="senha">Senha</label>
       <input id="senha" type="password" formControlName="senha" placeholder="Digite sua senha" />
+
+      <div class="recuperar-senha">
+        <a (click)="irParaRecuperarSenha()">Esqueci minha senha</a>
+      </div>
     </div>
+
+   
 
     <div *ngIf="erroLogin" class="erro">{{ erroLogin }}</div>
 
@@ -18,4 +24,6 @@
       <button type="submit">Entrar</button>
     </div>
   </form>
+
+ 
 </div>

@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <h2>Redefinir Senha</h2>
+  <form [formGroup]="form" (ngSubmit)="redefinir()">
+    <div class="form-group">
+      <label for="novaSenha">Nova Senha</label>
+      <input id="novaSenha" formControlName="novaSenha" placeholder="Nova senha" type="password" />
+    </div>
+    <div class="form-actions">
+      <button type="submit">Redefinir</button>
+    </div>
+  </form>
+  <p *ngIf="mensagem" class="mensagem">{{ mensagem }}</p>
+</div>

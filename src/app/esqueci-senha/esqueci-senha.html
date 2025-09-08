@@ -1,0 +1,21 @@
+<div class="auth-container">
+  <h2>Recuperar Senha</h2>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input id="email" formControlName="email" placeholder="Digite seu e-mail" type="email" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+
+  <div class="form-actions">
+    <button type="button" class="btn-voltar" (click)="voltarLogin()">Voltar para Login</button>
+  </div>
+
+  <p *ngIf="mensagem" class="mensagem">{{ mensagem }}</p>
+  <p *ngIf="erro" class="erro">{{ erro }}</p>
+</div>

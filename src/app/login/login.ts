@@ -46,5 +46,9 @@ export class LoginComponent {
     });
   }
 
+  irParaRecuperarSenha() {
+    this.router.navigate(['/recuperar-senha']);
+  }
+
 }
 

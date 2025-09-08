@@ -19,7 +19,7 @@ interface UsuarioSingleResponse {
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'https://localhost:7224/api/Usuario'; // ajuste conforme sua API
+  private apiUrl = 'https://localhost:44363/api/Usuario'; // ajuste conforme sua API
 
   constructor(private http: HttpClient) {}
 
