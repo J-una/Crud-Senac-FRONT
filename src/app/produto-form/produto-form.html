@@ -5,39 +5,89 @@
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome do produto..." />
+      <input
+        id="nome"
+        type="text"
+        formControlName="nome"
+        placeholder="Digite o nome do produto..."
+        class="form-control"
+        [ngClass]="{'is-invalid': formProduto.get('nome')?.invalid && formProduto.get('nome')?.touched}" />
+      <div *ngIf="formProduto.get('nome')?.touched && formProduto.get('nome')?.hasError('required')" class="text-danger">
+        O nome é obrigatório.
+      </div>
     </div>
 
     <!-- Marca -->
     <div class="form-group">
       <label for="marca">Marca</label>
-      <input id="marca" type="text" formControlName="marca" placeholder="Digite a marca..." />
+      <input
+        id="marca"
+        type="text"
+        formControlName="marca"
+        placeholder="Digite a marca..."
+        class="form-control"
+        [ngClass]="{'is-invalid': formProduto.get('marca')?.invalid && formProduto.get('marca')?.touched}" />
+      <div *ngIf="formProduto.get('marca')?.touched && formProduto.get('marca')?.hasError('required')" class="text-danger">
+        A marca é obrigatória.
+      </div>
     </div>
 
     <!-- Tipo (dropdown) -->
     <div class="form-group">
       <label for="tipo">Tipo</label>
-      <select id="tipo" formControlName="tipo">
+      <select
+        id="tipo"
+        formControlName="tipo"
+        class="form-control"
+        [ngClass]="{'is-invalid': formProduto.get('tipo')?.invalid && formProduto.get('tipo')?.touched}">
         <option value="" disabled>Selecione o tipo</option>
         <option *ngFor="let tipo of tiposPreDefinidos" [value]="tipo">{{ tipo }}</option>
       </select>
+      <div *ngIf="formProduto.get('tipo')?.touched && formProduto.get('tipo')?.hasError('required')" class="text-danger">
+        O tipo é obrigatório.
+      </div>
     </div>
 
     <!-- Preço -->
     <div class="form-group">
       <label for="preco">Preço</label>
-      <input id="preco" type="number" formControlName="preco" placeholder="Digite o preço..." step="0.01" />
+      <input
+        id="preco"
+        type="number"
+        formControlName="preco"
+        placeholder="Digite o preço..."
+        step="0.01"
+        class="form-control"
+        [ngClass]="{'is-invalid': formProduto.get('preco')?.invalid && formProduto.get('preco')?.touched}" />
+      <div *ngIf="formProduto.get('preco')?.touched && formProduto.get('preco')?.hasError('required')" class="text-danger">
+        O preço é obrigatório.
+      </div>
+      <div *ngIf="formProduto.get('preco')?.touched && formProduto.get('preco')?.hasError('min')" class="text-danger">
+        O preço deve ser maior que 0.
+      </div>
     </div>
 
     <!-- Quantidade -->
     <div class="form-group">
       <label for="quantidade">Quantidade</label>
-      <input id="quantidade" type="number" formControlName="quantidade" placeholder="Digite a quantidade..." />
+      <input
+        id="quantidade"
+        type="number"
+        formControlName="quantidade"
+        placeholder="Digite a quantidade..."
+        class="form-control"
+        [ngClass]="{'is-invalid': formProduto.get('quantidade')?.invalid && formProduto.get('quantidade')?.touched}" />
+      <div *ngIf="formProduto.get('quantidade')?.touched && formProduto.get('quantidade')?.hasError('required')" class="text-danger">
+        A quantidade é obrigatória.
+      </div>
+      <div *ngIf="formProduto.get('quantidade')?.touched && formProduto.get('quantidade')?.hasError('min')" class="text-danger">
+        A quantidade mínima é 1.
+      </div>
     </div>
 
     <!-- Botões -->
     <div class="form-actions">
-      <button type="submit" class="btn-salvar">
+      <button type="submit" class="btn-salvar" [disabled]="formProduto.invalid">
         {{ ehEdicao ? 'Atualizar' : 'Cadastrar' }}
       </button>
       <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>

@@ -27,15 +27,17 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha';
 
 //AuthGuard e feito para proteger as rotas que precisam de autenticação
 export const routes: Routes = [
-  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard], data: { perfisPermitidos: ['Administrador'] } },
+  { path: 'usuario/novo', component: UsuarioFormComponent, canActivate: [AuthGuard], data: { perfisPermitidos: ['Administrador'] } },
+  { path: 'usuario/editar/:id', component: UsuarioFormComponent, canActivate: [AuthGuard], data: { perfisPermitidos: ['Administrador'] } },
+
   { path: 'cliente', component: ClienteComponent, canActivate: [AuthGuard] },
   { path: 'produto', component: ProdutoComponent, canActivate: [AuthGuard] },
-  { path: 'usuario/novo', component: UsuarioFormComponent, canActivate: [AuthGuard] },
-  { path: 'usuario/editar/:id', component: UsuarioFormComponent, canActivate: [AuthGuard] },
   { path: 'cliente/novo', component: ClienteFormComponent, canActivate: [AuthGuard] },
   { path: 'cliente/editar/:id', component: ClienteFormComponent, canActivate: [AuthGuard] },  
   { path: 'produto/novo', component: ProdutoFormComponent, canActivate: [AuthGuard] },
   { path: 'produto/editar/:id', component: ProdutoFormComponent, canActivate: [AuthGuard] },
+
   { path: 'login', component: LoginComponent },
   { path: 'recuperar-senha', component: EsqueciSenhaComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent },

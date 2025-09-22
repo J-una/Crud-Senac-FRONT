@@ -2,7 +2,9 @@
   <div class="navbar-brand">Senac</div>
 
   <ul class="navbar-links">
-    <li><a routerLink="/usuario" routerLinkActive="active">Usuários</a></li>
+    <li *ngIf="usuario?.perfil === 'Administrador'">
+      <a routerLink="/usuario" routerLinkActive="active">Usuários</a>
+    </li>
     <li><a routerLink="/cliente" routerLinkActive="active">Clientes</a></li>
     <li><a routerLink="/produto" routerLinkActive="active">Produtos</a></li>
   </ul>

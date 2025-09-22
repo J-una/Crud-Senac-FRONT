@@ -44,7 +44,7 @@ h2 {
 
 .btn-salvar {
   padding: 8px 15px;
-  background: #28a745;
+  background: #1b307d;
   color: white;
   border: none;
   border-radius: 4px;
@@ -52,7 +52,7 @@ h2 {
 }
 
 .btn-salvar:hover {
-  background: #218838;
+  background: #040947;
 }
 
 .btn-cancelar {

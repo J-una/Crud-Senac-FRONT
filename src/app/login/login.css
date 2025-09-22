@@ -65,21 +65,21 @@ form {
 }
 
 .form-actions button {
-  padding: 10px 20px;
-  background: #28a745;
+  padding: 10px 50px;
+  background: #1b307d;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
 }
 
 .form-actions button:hover {
-  background: #218838;
+  background: #040947;
 }
 
 .recuperar-senha {
-  text-align: center;
+  text-align: start;
   margin-top: 15px;
 }
 

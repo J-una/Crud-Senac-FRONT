@@ -6,25 +6,24 @@ import { AuthService } from '../AuthService';
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './inicio.html',
   styleUrls: ['./inicio.css']
 })
 export class Inicio {
+  logado = false;
+  usuario: any = null;
 
-   logado = false;
-
-   constructor(
-    private routermodule: RouterModule,
+  constructor(
     private authService: AuthService,
     private router: Router
-   ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.authService.logado$.subscribe(status => {
       this.logado = status;
-      console.log('Usuário logado:', this.logado);
+      const user = localStorage.getItem('usuarioLogado');
+      this.usuario = user ? JSON.parse(user) : null;
     });
   }
 
@@ -32,5 +31,4 @@ export class Inicio {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
 }

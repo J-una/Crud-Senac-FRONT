@@ -4,11 +4,12 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import { AuthService } from '../AuthService';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,NgxMaskDirective],
+   providers: [provideNgxMask()],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -37,7 +38,7 @@ export class LoginComponent {
       next: (res) => {
         if (res) {
           this.authService.login(res); // notifica serviço de autenticação
-          this.router.navigate(['/usuario']);
+          this.router.navigate(['/cliente']);
         }
       },
       error: (err) => {

@@ -5,30 +5,73 @@
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome..." />
+      <input 
+        id="nome" 
+        type="text" 
+        formControlName="nome" 
+        placeholder="Digite o nome..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formCliente.get('nome')?.invalid && formCliente.get('nome')?.touched}" />
+      <div *ngIf="formCliente.get('nome')?.touched && formCliente.get('nome')?.hasError('required')" class="text-danger">
+        O nome é obrigatório.
+      </div>
     </div>
 
     <!-- CPF -->
     <div class="form-group">
       <label for="cpf">CPF</label>
-      <input id="cpf" type="text" formControlName="cpf" placeholder="Digite o CPF..." [disabled]="ehEdicao" />
+      <input 
+        id="cpf" 
+        type="text" 
+        formControlName="cpf" 
+        placeholder="Digite o CPF..." 
+        [disabled]="ehEdicao" 
+        class="form-control"
+        [ngClass]="{'is-invalid': formCliente.get('cpf')?.invalid && formCliente.get('cpf')?.touched}" />
+      <div *ngIf="formCliente.get('cpf')?.touched && formCliente.get('cpf')?.hasError('required')" class="text-danger">
+        O CPF é obrigatório.
+      </div>
     </div>
 
     <!-- Email -->
     <div class="form-group">
       <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" placeholder="Digite o email..." />
+      <input 
+        id="email" 
+        type="email" 
+        formControlName="email" 
+        placeholder="Digite o email..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formCliente.get('email')?.invalid && formCliente.get('email')?.touched}" />
+      <div *ngIf="formCliente.get('email')?.touched && formCliente.get('email')?.hasError('required')" class="text-danger">
+        O email é obrigatório.
+      </div>
+      <div *ngIf="formCliente.get('email')?.touched && formCliente.get('email')?.hasError('email')" class="text-danger">
+        Digite um email válido.
+      </div>
     </div>
 
     <!-- Senha (somente em cadastro) -->
     <div class="form-group" *ngIf="!ehEdicao">
       <label for="senha">Senha</label>
-      <input id="senha" type="password" formControlName="senha" placeholder="Digite a senha..." />
+      <input 
+        id="senha" 
+        type="password" 
+        formControlName="senha" 
+        placeholder="Digite a senha..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formCliente.get('senha')?.invalid && formCliente.get('senha')?.touched}" />
+      <div *ngIf="formCliente.get('senha')?.touched && formCliente.get('senha')?.hasError('required')" class="text-danger">
+        A senha é obrigatória.
+      </div>
+      <div *ngIf="formCliente.get('senha')?.touched && formCliente.get('senha')?.hasError('minlength')" class="text-danger">
+        A senha deve ter pelo menos 6 caracteres.
+      </div>
     </div>
 
     <!-- Botões -->
     <div class="form-actions">
-      <button type="submit" class="btn-salvar">
+      <button type="submit" class="btn-salvar" [disabled]="formCliente.invalid">
         {{ ehEdicao ? 'Atualizar' : 'Cadastrar' }}
       </button>
       <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>

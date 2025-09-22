@@ -14,3 +14,13 @@ app-root {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.text-danger {
+  color: red;
+  font-size: 0.875rem; /* opcional: tamanho menor para erros */
+  margin-top: 0.25rem;
+}
+
+.is-invalid {
+  border-color: red;
+}

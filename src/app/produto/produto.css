@@ -35,7 +35,7 @@ h2 {
 .btn-cadastrar {
   margin-left: 10px;
   padding: 8px 15px;
-  background: #28a745;
+  background: #1b307d;
   color: white;
   border: none;
   border-radius: 4px;
@@ -43,7 +43,7 @@ h2 {
 }
 
 .btn-cadastrar:hover {
-  background: #218838;
+  background: #040947;
 }
 
 /* Tabela */

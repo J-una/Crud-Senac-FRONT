@@ -5,40 +5,90 @@
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome..." />
+      <input 
+        id="nome" 
+        type="text" 
+        formControlName="nome" 
+        placeholder="Digite o nome..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formUsuario.get('nome')?.invalid && formUsuario.get('nome')?.touched}" />
+      <div *ngIf="formUsuario.get('nome')?.touched && formUsuario.get('nome')?.hasError('required')" class="text-danger">
+        O nome é obrigatório.
+      </div>
     </div>
 
     <!-- CPF -->
     <div class="form-group">
       <label for="cpf">CPF</label>
-      <input id="cpf" type="text" formControlName="cpf" placeholder="Digite o CPF..." [disabled]="ehEdicao" />
+      <input 
+        id="cpf" 
+        type="text" 
+        formControlName="cpf" 
+        placeholder="Digite o CPF..." 
+        [disabled]="ehEdicao" 
+        class="form-control"
+        [ngClass]="{'is-invalid': formUsuario.get('cpf')?.invalid && formUsuario.get('cpf')?.touched}" />
+      <div *ngIf="formUsuario.get('cpf')?.touched && formUsuario.get('cpf')?.hasError('required')" class="text-danger">
+        O CPF é obrigatório.
+      </div>
     </div>
 
-     <!-- EMAIL -->
+    <!-- Email -->
     <div class="form-group">
       <label for="email">Email</label>
-      <input id="email" type="text" formControlName="email" placeholder="Digite o Email..." />
+      <input 
+        id="email" 
+        type="email" 
+        formControlName="email" 
+        placeholder="Digite o Email..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formUsuario.get('email')?.invalid && formUsuario.get('email')?.touched}" />
+      <div *ngIf="formUsuario.get('email')?.touched && formUsuario.get('email')?.hasError('required')" class="text-danger">
+        O email é obrigatório.
+      </div>
+      <div *ngIf="formUsuario.get('email')?.touched && formUsuario.get('email')?.hasError('email')" class="text-danger">
+        Digite um email válido.
+      </div>
     </div>
 
-    <!-- Senha (somente em cadastro ou se editar explicitamente) -->
+    <!-- Senha (somente em cadastro) -->
     <div class="form-group" *ngIf="!ehEdicao">
       <label for="senha">Senha</label>
-      <input id="senha" type="password" formControlName="senha" placeholder="Digite a senha..." />
+      <input 
+        id="senha" 
+        type="password" 
+        formControlName="senha" 
+        placeholder="Digite a senha..." 
+        class="form-control"
+        [ngClass]="{'is-invalid': formUsuario.get('senha')?.invalid && formUsuario.get('senha')?.touched}" />
+      <div *ngIf="formUsuario.get('senha')?.touched && formUsuario.get('senha')?.hasError('required')" class="text-danger">
+        A senha é obrigatória.
+      </div>
+      <div *ngIf="formUsuario.get('senha')?.touched && formUsuario.get('senha')?.hasError('minlength')" class="text-danger">
+        A senha deve ter pelo menos 6 caracteres.
+      </div>
     </div>
 
     <!-- Perfil -->
     <div class="form-group">
       <label for="perfil">Perfil</label>
-      <select id="perfil" formControlName="perfil">
+      <select 
+        id="perfil" 
+        formControlName="perfil" 
+        class="form-control"
+        [ngClass]="{'is-invalid': formUsuario.get('perfil')?.invalid && formUsuario.get('perfil')?.touched}">
         <option value="">Selecione...</option>
         <option value="Administrador">Administrador</option>
         <option value="Usuario">Usuário</option>
       </select>
+      <div *ngIf="formUsuario.get('perfil')?.touched && formUsuario.get('perfil')?.hasError('required')" class="text-danger">
+        O perfil é obrigatório.
+      </div>
     </div>
 
     <!-- Botões -->
     <div class="form-actions">
-      <button type="submit" class="btn-salvar">
+      <button type="submit" class="btn-salvar" [disabled]="formUsuario.invalid">
         {{ ehEdicao ? 'Atualizar' : 'Cadastrar' }}
       </button>
       <button type="button" class="btn-cancelar" (click)="voltar()">Cancelar</button>

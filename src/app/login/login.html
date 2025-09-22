@@ -4,26 +4,41 @@
   <form [formGroup]="formLogin" (ngSubmit)="login()">
     <div class="form-group">
       <label for="cpf">CPF</label>
-      <input id="cpf" type="text" formControlName="cpf" placeholder="Digite seu CPF" />
+      <input 
+        id="cpf" 
+        type="text" 
+        formControlName="cpf" 
+        placeholder="Digite seu CPF" 
+        mask="000.000.000-00"
+        class="form-control"
+        [ngClass]="{'is-invalid': formLogin.get('cpf')?.invalid && formLogin.get('cpf')?.touched}" />
+      <div *ngIf="formLogin.get('cpf')?.touched && formLogin.get('cpf')?.hasError('required')" class="text-danger">
+        O CPF é obrigatório.
+      </div>
     </div>
 
     <div class="form-group">
       <label for="senha">Senha</label>
-      <input id="senha" type="password" formControlName="senha" placeholder="Digite sua senha" />
+      <input 
+        id="senha" 
+        type="password" 
+        formControlName="senha" 
+        placeholder="Digite sua senha"
+        class="form-control"
+        [ngClass]="{'is-invalid': formLogin.get('senha')?.invalid && formLogin.get('senha')?.touched}" />
+      <div *ngIf="formLogin.get('senha')?.touched && formLogin.get('senha')?.hasError('required')" class="text-danger">
+        A senha é obrigatória.
+      </div>
 
       <div class="recuperar-senha">
-        <a (click)="irParaRecuperarSenha()">Esqueci minha senha</a>
+        <a (click)="irParaRecuperarSenha()">Esqueceu a sua senha?</a>
       </div>
     </div>
 
-   
-
-    <div *ngIf="erroLogin" class="erro">{{ erroLogin }}</div>
+    <div *ngIf="erroLogin" class="text-danger">{{ erroLogin }}</div>
 
     <div class="form-actions">
-      <button type="submit">Entrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="formLogin.invalid">Entrar</button>
     </div>
   </form>
-
- 
 </div>

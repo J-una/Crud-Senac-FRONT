@@ -18,7 +18,11 @@ export class AutenticacaoService {
   return this.http.post(`${this.apiUrl}/solicitar-recuperacao`, { email }, { responseType: 'text' });
   }
 
-  redefinirSenha(token: string, novaSenha: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/redefinir-senha`, { token, novaSenha });
-  }
+  redefinirSenha(token: string, novaSenha: string): Observable<string> {
+  return this.http.post(
+    `${this.apiUrl}/redefinir-senha`,
+    { token, novaSenha },
+    { responseType: 'text' }
+  );
+}
 }
