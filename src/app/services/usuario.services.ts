@@ -42,4 +42,7 @@ export class UsuarioService {
   excluir(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/inativar-usuario/${id}`);
   }
+  verificarDuplicado(campo: string, valor: string) {
+    return this.http.get<any>(`${this.apiUrl}/verificar-duplicado?${campo}=${valor}`);
+  }
 }

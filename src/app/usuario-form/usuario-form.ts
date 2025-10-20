@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.services';
 import { Usuario } from '../const/Interface';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { map, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-usuario-form',
@@ -28,8 +29,8 @@ export class UsuarioFormComponent implements OnInit {
   ngOnInit(): void {
     this.formUsuario = this.fb.group({
       nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      cpf: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email], [this.emailAsyncValidator()]],
+      cpf: ['', Validators.required, [this.cpfAsyncValidator()]],
       senha: [''],
       perfil: ['', Validators.required]
     });
@@ -55,6 +56,30 @@ export class UsuarioFormComponent implements OnInit {
     });
   });
 }
+
+  // Validadores assíncronos de CPF e Email já cadastrados
+  cpfAsyncValidator(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control.value) return of(null);
+      const cpfLimpo = control.value.replace(/\D/g, '');
+      if (!cpfLimpo) return of(null);
+      return this.usuarioService.verificarDuplicado('cpf', cpfLimpo).pipe(
+        map(res => (res.duplicado ? { cpfDuplicado: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
+
+  emailAsyncValidator(): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control.value) return of(null);
+
+      return this.usuarioService.verificarDuplicado('email', control.value).pipe(
+        map(res => (res.duplicado ? { emailDuplicado: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
 
   salvar() {
     if (this.formUsuario.invalid) return;

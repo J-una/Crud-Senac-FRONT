@@ -31,6 +31,9 @@
       <div *ngIf="formUsuario.get('cpf')?.touched && formUsuario.get('cpf')?.hasError('required')" class="text-danger">
         O CPF é obrigatório.
       </div>
+      <div *ngIf="formUsuario.get('cpf')?.hasError('cpfDuplicado')" class="text-danger">
+        Este CPF já está cadastrado.
+      </div>
     </div>
 
     <!-- Email -->
@@ -48,6 +51,9 @@
       </div>
       <div *ngIf="formUsuario.get('email')?.touched && formUsuario.get('email')?.hasError('email')" class="text-danger">
         Digite um email válido.
+      </div>
+      <div *ngIf="formUsuario.get('email')?.hasError('emailDuplicado')" class="text-danger">
+        Este email já está cadastrado.
       </div>
     </div>
 
