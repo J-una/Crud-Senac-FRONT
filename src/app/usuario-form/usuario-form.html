@@ -25,6 +25,7 @@
         type="text" 
         formControlName="cpf" 
         placeholder="Digite o CPF..." 
+        mask="000.000.000-00"
         [disabled]="ehEdicao" 
         class="form-control"
         [ngClass]="{'is-invalid': formUsuario.get('cpf')?.invalid && formUsuario.get('cpf')?.touched}" />

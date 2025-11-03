@@ -17,7 +17,7 @@ export class ProdutoFormComponent implements OnInit {
   formProduto!: FormGroup;
   ehEdicao = false;
   idProduto!: string;
-  private idUsuario: string = 'A8485647-098E-4385-A678-18B49BF8266F';
+  private idUsuario: string = '';
 
   tiposPreDefinidos = ['Eletrônico', 'Alimento', 'Roupas', 'Móvel', 'Outro'];
 
@@ -29,6 +29,14 @@ export class ProdutoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+    if (usuarioLogado) {
+      const usuario = JSON.parse(usuarioLogado);
+      this.idUsuario = usuario.idUsuario || '';
+      console.log('Usuário logado:', usuario);
+    }
+
     this.formProduto = this.fb.group({
       nome: ['', Validators.required],
       marca: ['', Validators.required],

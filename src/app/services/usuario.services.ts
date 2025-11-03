@@ -42,7 +42,11 @@ export class UsuarioService {
   excluir(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/inativar-usuario/${id}`);
   }
-  verificarDuplicado(campo: string, valor: string) {
-    return this.http.get<any>(`${this.apiUrl}/verificar-duplicado?${campo}=${valor}`);
-  }
+  verificarDuplicado(campo: string, valor: string, id?: string) {
+  let params = new URLSearchParams();
+  params.append(campo, valor);
+  if (id) params.append('id', id); // 🔹 inclui o ID apenas se houver
+
+  return this.http.get<any>(`${this.apiUrl}/verificar-duplicado?${params.toString()}`);
+}
 }

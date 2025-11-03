@@ -32,7 +32,7 @@ export class ClienteService {
   }
 
   cadastrar(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(`${this.apiUrl}/adicionar-cliente`, cliente);
+    return this.http.post<any>(`${this.apiUrl}/adicionar-cliente`, cliente);
   }
 
   editar(id: string, cliente: Cliente): Observable<void> {

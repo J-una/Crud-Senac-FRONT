@@ -6,11 +6,13 @@ import { Usuario } from '../const/Interface';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { map, catchError, of } from 'rxjs';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-usuario-form',
   standalone: true, // <- importante
-  imports: [CommonModule, ReactiveFormsModule], // <- adiciona aqui
+  imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective],
+  providers: [provideNgxMask()], 
   templateUrl: './usuario-form.html',
   styleUrls: ['./usuario-form.css']
 })
@@ -61,20 +63,26 @@ export class UsuarioFormComponent implements OnInit {
   cpfAsyncValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
       if (!control.value) return of(null);
+
       const cpfLimpo = control.value.replace(/\D/g, '');
-      if (!cpfLimpo) return of(null);
-      return this.usuarioService.verificarDuplicado('cpf', cpfLimpo).pipe(
+      if (cpfLimpo.length < 11) return of(null);
+
+      return this.usuarioService.verificarDuplicado('cpf', cpfLimpo, this.idUsuario).pipe(
         map(res => (res.duplicado ? { cpfDuplicado: true } : null)),
         catchError(() => of(null))
       );
     };
   }
 
+
   emailAsyncValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
       if (!control.value) return of(null);
 
-      return this.usuarioService.verificarDuplicado('email', control.value).pipe(
+      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(control.value);
+      if (!emailValido) return of(null); 
+
+      return this.usuarioService.verificarDuplicado('email', control.value, this.idUsuario).pipe(
         map(res => (res.duplicado ? { emailDuplicado: true } : null)),
         catchError(() => of(null))
       );
@@ -85,6 +93,7 @@ export class UsuarioFormComponent implements OnInit {
     if (this.formUsuario.invalid) return;
 
     const usuario = this.formUsuario.getRawValue();
+    usuario.cpf = usuario.cpf.replace(/\D/g, '');
 
     if (this.ehEdicao) {
       this.usuarioService.editar(this.idUsuario, usuario).subscribe(() => {

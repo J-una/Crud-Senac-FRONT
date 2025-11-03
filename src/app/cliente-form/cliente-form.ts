@@ -5,11 +5,13 @@ import { ClienteService } from '../services/cliente.service';
 import { Cliente } from '../const/Interface';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-cliente-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective],
+  providers: [provideNgxMask()], 
   templateUrl: './cliente-form.html',
   styleUrls: ['./cliente-form.css']
 })
@@ -17,7 +19,7 @@ export class ClienteFormComponent implements OnInit {
   formCliente!: FormGroup;
   ehEdicao = false;
   idCliente!: string;
-  private idUsuario: string = 'A8485647-098E-4385-A678-18B49BF8266F'; // substitua pelo ID real do usuário logado
+  private idUsuario: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +29,14 @@ export class ClienteFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+    if (usuarioLogado) {
+      const usuario = JSON.parse(usuarioLogado);
+      this.idUsuario = usuario.idUsuario || '';
+      console.log('Usuário logado:', usuario);
+    }
+    
     this.formCliente = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', Validators.required],

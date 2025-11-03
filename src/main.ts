@@ -1,13 +1,15 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
-import { Inicio } from './app/inicio/inicio';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { App } from './app/app'; // 👈 deve iniciar o App principal
+import { LoadingInterceptor } from './app/services/loading.interceptor';
 
-
-bootstrapApplication(Inicio, {
-  providers: [provideRouter(routes),
-  provideHttpClient() 
-  ] 
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(
+      withInterceptors([LoadingInterceptor]) 
+    )
+  ]
 });

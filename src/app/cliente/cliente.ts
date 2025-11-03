@@ -44,7 +44,7 @@ pesquisarClientes(): void {
 
   this.clientesFiltrados = this.clientes.filter(c =>
     c.nome.toLowerCase().includes(termo) ||
-    c.cpf.replace(/\D/g, '').includes(termo.replace(/\D/g, '')) || // ignora pontos e traços
+    c.cpf.toLowerCase().includes(termo) ||
     c.email.toLowerCase().includes(termo)
   );
 }
