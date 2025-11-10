@@ -46,23 +46,38 @@
       <div *ngIf="formProduto.get('tipo')?.touched && formProduto.get('tipo')?.hasError('required')" class="text-danger">
         O tipo é obrigatório.
       </div>
-    </div>
+      </div>
 
     <!-- Preço -->
     <div class="form-group">
       <label for="preco">Preço</label>
       <input
         id="preco"
-        type="number"
+        type="text"
         formControlName="preco"
         placeholder="Digite o preço..."
-        step="0.01"
         class="form-control"
-        [ngClass]="{'is-invalid': formProduto.get('preco')?.invalid && formProduto.get('preco')?.touched}" />
-      <div *ngIf="formProduto.get('preco')?.touched && formProduto.get('preco')?.hasError('required')" class="text-danger">
+        (input)="formatarPreco($event)"
+        [ngClass]="{
+          'is-invalid': formProduto.get('preco')?.invalid && formProduto.get('preco')?.touched
+        }"
+      />
+      <div
+        *ngIf="
+          formProduto.get('preco')?.touched &&
+          formProduto.get('preco')?.hasError('required')
+        "
+        class="text-danger"
+      >
         O preço é obrigatório.
       </div>
-      <div *ngIf="formProduto.get('preco')?.touched && formProduto.get('preco')?.hasError('min')" class="text-danger">
+      <div
+        *ngIf="
+          formProduto.get('preco')?.touched &&
+          formProduto.get('preco')?.hasError('min')
+        "
+        class="text-danger"
+      >
         O preço deve ser maior que 0.
       </div>
     </div>
@@ -76,6 +91,9 @@
         formControlName="quantidade"
         placeholder="Digite a quantidade..."
         class="form-control"
+        min="1"
+        (input)="validarQuantidade($event)"
+        (keydown)="bloquearNegativo($event)"
         [ngClass]="{'is-invalid': formProduto.get('quantidade')?.invalid && formProduto.get('quantidade')?.touched}" />
       <div *ngIf="formProduto.get('quantidade')?.touched && formProduto.get('quantidade')?.hasError('required')" class="text-danger">
         A quantidade é obrigatória.

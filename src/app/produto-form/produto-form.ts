@@ -41,8 +41,8 @@ export class ProdutoFormComponent implements OnInit {
       nome: ['', Validators.required],
       marca: ['', Validators.required],
       tipo: ['', Validators.required],
-      preco: [0, [Validators.required, Validators.min(0.01)]],
-      quantidade: [0, [Validators.required, Validators.min(1)]]
+      preco: [null, [Validators.required, Validators.min(0.01)]],
+      quantidade: [null, [Validators.required, Validators.min(1)]]
     });
 
     this.idProduto = this.route.snapshot.paramMap.get('id') ?? '';
@@ -54,19 +54,69 @@ export class ProdutoFormComponent implements OnInit {
 
   carregarProduto() {
     this.produtoService.listarId(this.idProduto).subscribe(res => {
+      const preco = res.dados.preco?.toString().replace('.', ',');
+      const precoFormatado = preco.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
       this.formProduto.patchValue({
         nome: res.dados.nome,
         marca: res.dados.marca,
         tipo: res.dados.tipo,
-        preco: res.dados.preco,
+        preco: precoFormatado,
         quantidade: res.dados.quantidade
       });
     });
+  }
+  
+  validarQuantidade(event: any) {
+  const valor = event.target.value;
+  if (valor < 0) {
+    event.target.value = 0;
+    this.formProduto.get('quantidade')?.setValue(0);
+  }
+}
+
+bloquearNegativo(event: KeyboardEvent) {
+  if (event.key === '-' || event.key === '+' || event.key === 'e' || event.key === 'E') {
+    event.preventDefault(); 
+  }
+}
+
+  formatarPreco(event: any) {
+    let valor = event.target.value;
+
+    valor = valor.replace(/\D/g, '');
+
+    if (valor === '') {
+      event.target.value = '';
+      this.formProduto.get('preco')?.setValue('');
+      return;
+    }
+
+    valor = (parseInt(valor, 10) / 100).toFixed(2) + '';
+
+    valor = valor.replace('.', ',');
+
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    event.target.value = valor;
+
+    this.formProduto.get('preco')?.setValue(valor, { emitEvent: false });
   }
 
   salvar() {
     if (this.formProduto.invalid) return;
 
+
+    const precoMascarado = this.formProduto.get('preco')?.value || '0';
+
+    // Converte "1.234,56" → 1234.56
+    const precoNumerico = parseFloat(
+      precoMascarado.toString().replace(/\./g, '').replace(',', '.')
+    );
+
+    // Atualiza o form com o valor numérico
+    this.formProduto.patchValue({ preco: precoNumerico });
+    
     const produto: Produto = {
       ...this.formProduto.getRawValue(),
       idUsuario: this.idUsuario,

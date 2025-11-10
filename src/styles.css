@@ -24,3 +24,15 @@ app-root {
 .is-invalid {
   border-color: red;
 }
+
+/* Remove as setinhas no Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove as setinhas no Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
